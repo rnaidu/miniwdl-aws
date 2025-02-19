@@ -49,7 +49,7 @@ import subprocess
 import sys
 
 
-RELEASE_VERSION_FILE = "RELEASE-VERSION"
+RELEASE_VERSION_FILE = "v0.0.1"
 
 # http://www.python.org/dev/peps/pep-0386/
 _PEP386_SHORT_VERSION_RE = r"\d+(?:\.\d+)+(?:(?:[abc]|rc)\d+(?:\.\d+)*)?"

@@ -80,7 +80,7 @@ def miniwdl_submit_awsbatch(argv):
         f"{workflow_job_def['jobDefinitionName']}:{workflow_job_def['revision']}"
     )
     try:
-        job_tags["Owner"] = os.environ["OWNER"]
+        job_tags["Owner"] = str(args.tags)
         workflow_job_id = aws_batch.submit_job(
             jobName=job_name,
             jobQueue=args.workflow_queue,
@@ -160,6 +160,7 @@ def parse_args(argv):
         " or detect from WorkflowEngineRoleArn tag on workflow job queue]",
     )
     group.add_argument("--name", help="workflow job name [WDL filename]")
+    group.add_argument("--tags", help="User customized dictionary of AWS Batch Job submission job tags.")
     group.add_argument(
         "--cpu", metavar="N", type=str, default="1", help="vCPUs for workflow job [1]"
     )
@@ -232,6 +233,11 @@ def detect_env_args(args):
         if args.workflow_queue
         else os.environ.get("MINIWDL__AWS__WORKFLOW_QUEUE", None)
     )
+    args.tags = (
+        args.tags
+        if args.tags
+        else os.environ.get("MINIWDL__AWS__JOB_TAGS", None)
+    )
     if not args.workflow_queue:
         print(
             "--workflow-queue is required (or environment variable MINIWDL__AWS__WORKFLOW_QUEUE)",
@@ -250,6 +256,7 @@ def detect_env_args(args):
         else os.environ.get("MINIWDL__AWS__WORKFLOW_ROLE", None)
     )
     args.image = args.image if args.image else os.environ.get("MINIWDL__AWS__WORKFLOW_IMAGE", None)
+    
     if not args.image:
         # version-matched default image from our GitHub build
         import importlib_metadata
