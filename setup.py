@@ -6,7 +6,7 @@ with open("README.md") as fp:
 
 setup(
     name="miniwdl-aws",
-    version="0.0.1",
+    version=get_version(),
     description="miniwdl AWS backend (Batch+EFS)",
     long_description=long_description,
     long_description_content_type="text/markdown",
