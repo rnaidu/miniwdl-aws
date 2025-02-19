@@ -80,6 +80,7 @@ def miniwdl_submit_awsbatch(argv):
         f"{workflow_job_def['jobDefinitionName']}:{workflow_job_def['revision']}"
     )
     try:
+        job_tags["Owner"] = os.environ["OWNER"]
         workflow_job_id = aws_batch.submit_job(
             jobName=job_name,
             jobQueue=args.workflow_queue,
