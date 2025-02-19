@@ -108,10 +108,10 @@ def get_version():
     release_version = read_release_version()
     version = read_git_version() or release_version
     if not version:
-        raise ValueError("Cannot find the version number")
+        version = "0.0.0"
     if version != release_version:
         write_release_version(version)
-    return version
+    return 
 
 
 if __name__ == "__main__":
