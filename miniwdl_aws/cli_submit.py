@@ -519,6 +519,7 @@ def form_workflow_container_props(args, miniwdl_run_cmd, fs_id, wdl_zip=None, ve
     workflow_container_overrides = {
         "command": miniwdl_run_cmd,
         "environment": environment,
+        "propagateTags": True,
     }
     if args.efs:
         # EFS: set EFS volume/mountPoint and Fargate execution role

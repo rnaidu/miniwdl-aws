@@ -49,7 +49,7 @@ import subprocess
 import sys
 
 
-RELEASE_VERSION_FILE = "v0.0.1"
+RELEASE_VERSION_FILE = "RELEASE-VERSION"
 
 # http://www.python.org/dev/peps/pep-0386/
 _PEP386_SHORT_VERSION_RE = r"\d+(?:\.\d+)+(?:(?:[abc]|rc)\d+(?:\.\d+)*)?"
@@ -108,10 +108,10 @@ def get_version():
     release_version = read_release_version()
     version = read_git_version() or release_version
     if not version:
-        version = "0.0.0"
+        version = "0.12.2"
     if version != release_version:
         write_release_version(version)
-    return 
+    return version
 
 
 if __name__ == "__main__":
