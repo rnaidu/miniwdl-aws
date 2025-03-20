@@ -487,7 +487,7 @@ def form_workflow_container_props(args, miniwdl_run_cmd, fs_id, wdl_zip=None, ve
         ],
         "environment": [],
     }
-    job_def_tags = {}
+    job_def_tags = {"name":"test"}
     job_tags = {}
     if wdl_zip:
         # If the command line provided a local WDL (or WDL zipped by `miniwdl zip`), ship it in the
